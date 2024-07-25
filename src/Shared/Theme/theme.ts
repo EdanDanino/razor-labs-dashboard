@@ -1,7 +1,7 @@
 export const theme = {
   colors: {
-    primary: "#007bff",
-    secondary: "#6c757d",
+    primary: { light: "#7071f3", default: "#2f2f66" },
+    secondary: "#12ffe2",
     success: "#28a745",
     danger: "#dc3545",
     warning: "#ffc107",
@@ -10,12 +10,11 @@ export const theme = {
     dark: "#343a40",
     white: "#fff",
     black: "#000",
+    gray: "#e6e8ec",
+    shadow: "rgba(2, 29, 61, 0.12)",
   },
   fontSizes: {
-    small: "12px",
     medium: "14px",
-    large: "16px",
-    xlarge: "18px",
   },
   fontWeights: {
     light: 300,

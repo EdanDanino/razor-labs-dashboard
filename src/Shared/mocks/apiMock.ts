@@ -8,6 +8,7 @@ const mock = new MockAdapter(axios);
 const generateMockInsights = (count: number): Insight[] => {
   const types = ["bearing", "gear", "motor"];
   const severities = ["healthy", "alarm", "critical"];
+  const severityNumber = { healthy: 0, alarm: 1, critical: 2 };
   const insights: Insight[] = [];
 
   for (let i = 1; i <= count; i++) {
@@ -18,6 +19,10 @@ const generateMockInsights = (count: number): Insight[] => {
       Math.floor(Math.random() * 24),
       Math.floor(Math.random() * 60)
     );
+
+    const severity = severities[
+      Math.floor(Math.random() * severities.length)
+    ] as "healthy" | "alarm" | "critical";
     insights.push({
       insight_id: i.toString(),
       created_at: date.toISOString().replace("T", " ").substring(0, 19),
@@ -25,17 +30,15 @@ const generateMockInsights = (count: number): Insight[] => {
         | "bearing"
         | "gear"
         | "motor",
-      severity: severities[Math.floor(Math.random() * severities.length)] as
-        | "healthy"
-        | "alarm"
-        | "critical",
+      severity: severity,
+      severityNumber: severityNumber[severity],
     });
   }
 
   return insights;
 };
 
-const mockInsights = generateMockInsights(102);
+const mockInsights = generateMockInsights(10);
 
 // Mock the GET /insights endpoint
 mock.onGet("/insights").reply((config) => {

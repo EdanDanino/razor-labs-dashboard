@@ -3,4 +3,5 @@ export type Insight = {
   created_at: string;
   type: "bearing" | "gear" | "motor";
   severity: "healthy" | "alarm" | "critical";
+  severityNumber: number; //0 | 1 | 2;
 };
