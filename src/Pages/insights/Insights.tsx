@@ -11,7 +11,7 @@ import { Column, createColumnHelper } from "@tanstack/react-table";
 
 export const Insights = () => {
   const dispatch: AppDispatch = useDispatch();
-  const [dataDateFrom, setDataDateFrom] = useState("2023-01-01");
+  const [dataDateFrom, setDataDateFrom] = useState("2024-06-06 00:00:00");
   const { insights, loading, error } = useSelector(
     (state: RootState) => state.insights
   );
@@ -21,6 +21,15 @@ export const Insights = () => {
   }, [dataDateFrom, dispatch]);
 
   const columnHelper = createColumnHelper<Insight>();
+
+  const graphData = useMemo(
+    () =>
+      insights.map((item) => ({
+        ...item,
+        created_at: formatDate(new Date(item.created_at)),
+      })),
+    [insights]
+  );
 
   const columns = useMemo(
     () => [
@@ -43,10 +52,7 @@ export const Insights = () => {
   return (
     <>
       <FusionGraph<Insight>
-        data={insights.map((item) => ({
-          ...item,
-          created_at: formatDate(new Date(item.created_at)),
-        }))}
+        data={graphData}
         xAxisDataKay="created_at"
         lineDataKey="severityNumber"
         CustomToolTipContent={InsightsTooltip as unknown as ReactElement}
