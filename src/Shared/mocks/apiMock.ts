@@ -44,9 +44,10 @@ const mockInsights = generateMockInsights(10);
 // Mock the GET /insights endpoint
 mock.onGet("/insights").reply((config) => {
   const fromDate = new Date(config.params.from_date);
-  const filteredInsights = mockInsights.filter(
-    (insight) => new Date(insight.created_at) >= fromDate
-  );
+
+  const filteredInsights = mockInsights.filter((insight) => {
+    return new Date(insight.created_at).getTime() >= fromDate.getTime();
+  });
   return [200, filteredInsights];
 });
 
