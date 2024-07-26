@@ -9,8 +9,9 @@ const mock = new MockAdapter(axios);
 
 const generateMockInsights = (count: number): Insight[] => {
   const insights: Insight[] = [];
+  const dates: Date[] = [];
 
-  for (let i = 1; i <= count; i++) {
+  for (let i = 0; i < count; i++) {
     const date = new Date(
       2024,
       Math.floor(Math.random() * 12),
@@ -18,7 +19,13 @@ const generateMockInsights = (count: number): Insight[] => {
       Math.floor(Math.random() * 24),
       Math.floor(Math.random() * 60)
     );
+    dates.push(date);
+  }
 
+  dates.sort((a, b) => a.getTime() - b.getTime());
+
+  for (let i = 0; i < count; i++) {
+    const date = dates[i];
     const severity = SEVERTIES[
       Math.floor(Math.random() * SEVERTIES.length)
     ] as Insight["severity"];
@@ -28,7 +35,7 @@ const generateMockInsights = (count: number): Insight[] => {
     ] as Insight["type"];
 
     insights.push({
-      insight_id: i.toString(),
+      insight_id: (i + 1).toString(),
       created_at: formatDate(date),
       type,
       severity,
@@ -39,7 +46,7 @@ const generateMockInsights = (count: number): Insight[] => {
   return insights;
 };
 
-const mockInsights = generateMockInsights(10);
+const mockInsights = generateMockInsights(30);
 
 // Mock the GET /insights endpoint
 mock.onGet("/insights").reply((config) => {
