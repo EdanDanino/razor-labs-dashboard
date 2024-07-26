@@ -6,7 +6,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactNode, useRef } from "react";
 import styled from "styled-components";
-import { formatDateToDayMonth } from "../../../../Utils/date";
+import { formatDateToDayMonth, formatToDDMMYYY } from "../../../../Utils/date";
 
 const Root = styled.div`
   flex-direction: column;
@@ -60,9 +60,8 @@ const FilterButton = styled.button`
   gap: 4px;
   padding: 4px 8px;
   border-radius: 8px;
-  border: none;
-  cursor: pointer;
   background-color: transparent;
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 `;
 
 export type GraphContainerProps = {
@@ -99,7 +98,7 @@ export const GraphContainer = ({
             }}
           >
             <FontAwesomeIcon icon={faCalendar} />
-            From {formatDateToDayMonth(new Date(filterValue))}
+            From {formatToDDMMYYY(filterValue)}
             <FontAwesomeIcon icon={faChevronDown} />
           </FilterButton>
           <input
