@@ -66,6 +66,12 @@ mock.onPost("/insights").reply((config) => {
     insight_id: String(mockInsights.length + 1),
   };
   mockInsights.push(newInsight);
+
+  mockInsights.sort(
+    (a, b) =>
+      new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+  );
+
   return [200, { insight_id: newInsight.insight_id }];
 });
 

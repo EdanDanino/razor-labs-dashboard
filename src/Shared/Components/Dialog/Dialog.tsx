@@ -16,19 +16,19 @@ const DialogTitle = styled(RadixDialog.Title)`
   gap: 16px;
   font-size: 14px;
   font-weight: 500;
-  color: #01152b;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const DialogOverlay = styled(RadixDialog.Overlay)`
-  background-color: rgba(1, 21, 43, 0.8);
+  background-color: ${({ theme }) => theme.colors.overlay};
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 `;
 
 const DialogContent = styled(RadixDialog.Content)`
-  background-color: white;
-  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 8px;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
     hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   position: fixed;
@@ -37,7 +37,7 @@ const DialogContent = styled(RadixDialog.Content)`
   transform: translate(-50%, -50%);
   min-width: 400px;
   max-height: 85vh;
-  padding: 0 16px;
+  padding: 0 ${({ theme }) => theme.spacing.medium};
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 `;
 export const Dialog = ({ title, children, ...rest }: DialogProps) => (

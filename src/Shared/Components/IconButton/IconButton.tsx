@@ -20,8 +20,6 @@ const IconButtonContainer = styled.button<{ selected: boolean }>`
     props.selected
       ? props.theme.colors.secondary
       : props.theme.colors.primary.default};
-  border: none;
-  cursor: pointer;
 
   &:focus {
     outline: none;

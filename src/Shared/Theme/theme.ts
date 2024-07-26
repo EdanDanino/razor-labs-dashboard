@@ -10,6 +10,7 @@ export const theme = {
     text: "#01152b",
     error: "#dc3545",
     secondary: "#12ffe2",
+    overlay: "rgba(1, 21, 43, 0.8)",
   },
   fontSizes: {
     small: "13px",

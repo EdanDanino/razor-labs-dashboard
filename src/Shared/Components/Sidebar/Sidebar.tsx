@@ -10,7 +10,7 @@ const SidebarContainer = styled.div<{ width: string }>`
   height: 100vh;
   width: ${(props) => props.width};
   background-color: ${(props) => props.theme.colors.primary.default};
-  padding: 16px 12px;
+  padding: ${(props) => props.theme.spacing.medium} 12px;
   justify-content: space-between;
   align-items: center;
 `;
