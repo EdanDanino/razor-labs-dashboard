@@ -34,7 +34,7 @@ const HeaderContainer = styled.header<{ height: string }>`
   padding: 12px 32px;
   box-shadow: 0 2px 8px 0 rgba(2, 29, 61, 0.12);
   background-color: ${(props) => props.theme.colors.white};
-  z-index: 1;
+  z-index: 0;
 `;
 
 export const Header = () => {
