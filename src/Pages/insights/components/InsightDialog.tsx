@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import { Dialog, Input, Select } from "../../../Shared/Components";
 import {
-  SEVERTIES,
   TYPES_NUMBER,
   TYPES,
+  SEVERTIES,
 } from "../../../Shared/Constants/inisight-consts";
 import { AppDispatch, addDiagnostic } from "../../../Shared/Store";
 import { Insight } from "../../../Shared/Types";

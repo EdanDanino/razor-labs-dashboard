@@ -1,2 +1,2 @@
-export * from "./InsightDialog";
 export * from "./InsightsTooltip";
+export * from "./InsightDialog";

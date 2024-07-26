@@ -25,6 +25,7 @@ const MainContent = styled.main<{ headerHeight: string }>`
   padding-top: ${(props) =>
     `calc(${props.headerHeight} + ${props.theme.spacing.medium})`};
   background-color: ${(props) => props.theme.colors.light};
+  overflow: auto;
 `;
 
 const CONTENT: Record<string, ReactNode> = {
