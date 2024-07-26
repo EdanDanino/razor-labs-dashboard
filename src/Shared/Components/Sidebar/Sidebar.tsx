@@ -23,17 +23,24 @@ const ButtonList = styled.div`
 
 const LogoutButton = styled(IconButton)`
   &:hover {
-    background-color: ${(props) => props.theme.colors.danger};
+    background-color: ${(props) => props.theme.colors.error};
   }
 `;
 
 export type SideBarProps = {
+  initiallyActiveIndex?: number;
   actionItems: IconButtonProps[];
   onLogOut: () => void;
 };
 
-export const SideBar = ({ actionItems, onLogOut }: SideBarProps) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+export const SideBar = ({
+  initiallyActiveIndex,
+  actionItems,
+  onLogOut,
+}: SideBarProps) => {
+  const [selectedIndex, setSelectedIndex] = useState<number | undefined>(
+    initiallyActiveIndex
+  );
 
   return (
     <SidebarContainer width={SIDEBAR_WIDTH}>

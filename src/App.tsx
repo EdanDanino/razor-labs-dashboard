@@ -28,6 +28,28 @@ const MainContent = styled.main<{ headerHeight: string }>`
   overflow: auto;
 `;
 
+const LogoutPage = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 16px;
+    border-radius: 8px;
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.primary.light};
+
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
+  }
+`;
+
 const CONTENT: Record<string, ReactNode> = {
   insights: <Insights />,
   info: <></>,
@@ -38,6 +60,7 @@ const CONTENT: Record<string, ReactNode> = {
 
 const Page = () => {
   const [activePage, setActivePage] = useState("");
+  const isLoggedOut = activePage === "logout";
   const actionItems = useMemo(
     () => [
       {
@@ -65,9 +88,21 @@ const Page = () => {
     setActivePage(actionItems[0]["id"]);
   }, [actionItems]);
 
+  if (isLoggedOut) {
+    return (
+      <LayoutContainer>
+        <LogoutPage>
+          You Have been logged out
+          <button onClick={() => setActivePage("insights")}>Log in</button>
+        </LogoutPage>
+      </LayoutContainer>
+    );
+  }
+
   return (
     <LayoutContainer>
       <SideBar
+        initiallyActiveIndex={0}
         actionItems={actionItems}
         onLogOut={() => setActivePage("logout")}
       />
