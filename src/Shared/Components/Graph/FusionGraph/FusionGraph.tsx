@@ -6,7 +6,10 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { GraphContainer, GraphContainerProps } from "../shared/GraphContainer";
+import {
+  GraphContainer,
+  GraphContainerProps,
+} from "../shared/GraphContainer/GraphContainer";
 import { faChartLine } from "@fortawesome/free-solid-svg-icons";
 import { ReactElement } from "react";
 

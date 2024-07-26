@@ -9,6 +9,7 @@ export const theme = {
     shadow: "rgba(2, 29, 61, 0.12)",
     text: "#01152b",
     error: "#dc3545",
+    secondary: "#12ffe2",
   },
   fontSizes: {
     small: "13px",

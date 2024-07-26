@@ -57,7 +57,7 @@ export const IconButton = ({
 
   return (
     <IconButtonContainer selected={selected} onClick={handleClick} {...rest}>
-      <Icon icon={icon} selected={selected} />
+      <Icon icon={icon} selected={selected} data-testid="icon-button-icon" />
     </IconButtonContainer>
   );
 };

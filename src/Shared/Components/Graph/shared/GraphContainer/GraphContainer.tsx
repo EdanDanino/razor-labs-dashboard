@@ -6,7 +6,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactNode, useRef } from "react";
 import styled from "styled-components";
-import { formatDateToDayMonth } from "../../../Utils/date";
+import { formatDateToDayMonth } from "../../../../Utils/date";
 
 const Root = styled.div`
   flex-direction: column;
@@ -104,6 +104,7 @@ export const GraphContainer = ({
           </FilterButton>
           <input
             ref={pickerRef}
+            data-testid={"graph-container-date-filter"}
             id="date-filter"
             value={filterValue}
             type="date"
