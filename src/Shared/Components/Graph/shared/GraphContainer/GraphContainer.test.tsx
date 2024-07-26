@@ -3,8 +3,8 @@ import { faChartLine } from "@fortawesome/free-solid-svg-icons";
 import { fireEvent, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { renderWithTheme } from "../../../../Tests/renderWithTheme";
+import { formatToDDMMYYY } from "../../../../Utils/date";
 import { GraphContainer, GraphContainerProps } from "./GraphContainer";
-import { formatDateToDayMonth } from "../../../../Utils/date";
 
 const mockProps: GraphContainerProps = {
   children: <div>Graph content</div>,
@@ -20,9 +20,7 @@ describe("GraphContainer", () => {
     expect(screen.getByText("Sample Graph")).toBeInTheDocument();
     expect(screen.getByText("Graph content")).toBeInTheDocument();
     expect(
-      screen.getByText(
-        `From ${formatDateToDayMonth(new Date(mockProps.filterValue))}`
-      )
+      screen.getByText(`From ${formatToDDMMYYY(mockProps.filterValue)}`)
     ).toBeInTheDocument();
   });
 
@@ -38,7 +36,7 @@ describe("GraphContainer", () => {
   it("opens date picker when filter button is clicked", () => {
     renderWithTheme(<GraphContainer {...mockProps} />);
     const button = screen.getByText(
-      `From ${formatDateToDayMonth(new Date(mockProps.filterValue))}`
+      `From ${formatToDDMMYYY(mockProps.filterValue)}`
     );
     const input = screen.getByTestId(/date-filter/i);
 
@@ -63,9 +61,7 @@ describe("GraphContainer", () => {
   it("displays the correct filter button text", () => {
     renderWithTheme(<GraphContainer {...mockProps} />);
     expect(
-      screen.getByText(
-        `From ${formatDateToDayMonth(new Date(mockProps.filterValue))}`
-      )
+      screen.getByText(`From ${formatToDDMMYYY(mockProps.filterValue)}`)
     ).toBeInTheDocument();
   });
 });

@@ -74,25 +74,39 @@ const CancelButton = styled(BaseFormButtom)`
 export const InsightDialog = ({ open, setOpenDialog }: InsightDialogProps) => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { values, errors, handleChange, submitForm, isSubmitting, resetForm } =
-    useFormik<Partial<Insight>>({
-      validate,
-      validateOnMount: true,
-      initialValues: {
-        created_at: undefined,
-        type: undefined,
-        severity: undefined,
-      },
-      onSubmit: (values) => {
-        dispatch(
-          addDiagnostic({
-            ...values,
-            typeNumber: TYPES_NUMBER[values.type!],
-          })
-        );
-        resetForm();
-      },
-    });
+  const {
+    values,
+    errors,
+    handleChange,
+    submitForm,
+    isSubmitting,
+    resetForm,
+    setErrors,
+  } = useFormik<Partial<Insight>>({
+    validate,
+    validateOnMount: true,
+    initialValues: {
+      created_at: undefined,
+      type: undefined,
+      severity: undefined,
+    },
+    onSubmit: (values) => {
+      dispatch(
+        addDiagnostic({
+          ...values,
+          typeNumber: TYPES_NUMBER[values.type!],
+        })
+      );
+      resetForm();
+      setErrors({
+        created_at: "Required",
+        type: "Required",
+        severity: "Required",
+      });
+    },
+  });
+
+  console.log(errors);
 
   return (
     <Dialog open={open} title={"Add new diagonostic"}>

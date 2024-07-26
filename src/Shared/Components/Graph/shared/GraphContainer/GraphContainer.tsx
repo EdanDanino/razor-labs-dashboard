@@ -6,7 +6,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactNode, useRef } from "react";
 import styled from "styled-components";
-import { formatDateToDayMonth, formatToDDMMYYY } from "../../../../Utils/date";
+import { formatToDDMMYYY } from "../../../../Utils/date";
 
 const Root = styled.div`
   flex-direction: column;
