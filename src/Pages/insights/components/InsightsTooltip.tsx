@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NUMBER_TYPES } from "../../../Shared/Constants/inisight-consts";
 
 const TooltipContainer = styled.div`
   background: ${(props) => props.theme.colors.dark};
@@ -10,27 +11,19 @@ const TooltipContainer = styled.div`
   z-index: 1000;
 `;
 
-const TooltipLabel = styled.div`
-  font-weight: bold;
-  margin-bottom: 5px;
-`;
-
 const TooltipValue = styled.div`
   font-weight: normal;
 `;
 
 export type InsightsTooltipProps = {
   payload: unknown[];
-  label: string;
 };
 
-export const InsightsTooltip = ({ payload, label }: InsightsTooltipProps) => {
-  const severityNumber = { 0: "healthy", 1: "alarm", 2: "critical" };
-  //@ts-ignore
-  const value = severityNumber[payload[0]?.value];
+export const InsightsTooltip = ({ payload }: InsightsTooltipProps) => {
+  //@ts-expect-error The Graphs Lib types are sort of bad.
+  const value = NUMBER_TYPES[payload[0]?.value];
   return (
     <TooltipContainer>
-      <TooltipLabel>{label}</TooltipLabel>
       <TooltipValue>{value}</TooltipValue>
     </TooltipContainer>
   );

@@ -1,14 +1,13 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { Insight } from "../Types";
+import { formatDate } from "../Utils/date";
+import { SEVERTIES, TYPES_NUMBER, TYPES } from "../Constants/inisight-consts";
 
 // Create an instance of MockAdapter on the default instance
 const mock = new MockAdapter(axios);
 
 const generateMockInsights = (count: number): Insight[] => {
-  const types = ["bearing", "gear", "motor"];
-  const severities = ["healthy", "alarm", "critical"];
-  const severityNumber = { healthy: 0, alarm: 1, critical: 2 };
   const insights: Insight[] = [];
 
   for (let i = 1; i <= count; i++) {
@@ -20,18 +19,20 @@ const generateMockInsights = (count: number): Insight[] => {
       Math.floor(Math.random() * 60)
     );
 
-    const severity = severities[
-      Math.floor(Math.random() * severities.length)
-    ] as "healthy" | "alarm" | "critical";
+    const severity = SEVERTIES[
+      Math.floor(Math.random() * SEVERTIES.length)
+    ] as Insight["severity"];
+
+    const type = TYPES[
+      Math.floor(Math.random() * TYPES.length)
+    ] as Insight["type"];
+
     insights.push({
       insight_id: i.toString(),
-      created_at: date.toISOString().replace("T", " ").substring(0, 19),
-      type: types[Math.floor(Math.random() * types.length)] as
-        | "bearing"
-        | "gear"
-        | "motor",
-      severity: severity,
-      severityNumber: severityNumber[severity],
+      created_at: formatDate(date),
+      type,
+      severity,
+      typeNumber: TYPES_NUMBER[type],
     });
   }
 

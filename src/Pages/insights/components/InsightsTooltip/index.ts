@@ -1,1 +1,0 @@
-export { InsightsTooltip } from "./InsightsTooltip";

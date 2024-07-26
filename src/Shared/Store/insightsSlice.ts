@@ -28,7 +28,7 @@ export const fetchInsights = createAsyncThunk(
 // Async thunk for adding a new diagnostic
 export const addDiagnostic = createAsyncThunk(
   "insights/addDiagnostic",
-  async (newDiagnostic: Omit<Insight, "insight_id">) => {
+  async (newDiagnostic: Partial<Omit<Insight, "insight_id">>) => {
     const response = await axios.post("/insights", newDiagnostic);
     return { ...newDiagnostic, insight_id: response.data.insight_id };
   }

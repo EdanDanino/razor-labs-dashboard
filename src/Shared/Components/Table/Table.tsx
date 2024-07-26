@@ -1,4 +1,7 @@
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -8,59 +11,101 @@ import { styled } from "styled-components";
 const TablePageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
 `;
+
 const TableTopBar = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 0 ${(props) => props.theme.spacing.large};
+  align-items: center;
+
+  h3 {
+    font-size: 24px;
+    font-weight: ${(props) => props.theme.fontWeights.medium};
+    color: ${(props) => props.theme.colors.text};
+  }
+
+  button {
+    width: 108px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: ${(props) => props.theme.spacing.small};
+    padding: ${(props) => props.theme.spacing.small};
+    border-radius: 8px;
+    background-color: ${(props) => props.theme.colors.primary.light};
+    color: ${(props) => props.theme.colors.white};
+    justify-content: center;
+
+    &:hover {
+      background-color: ${(props) => props.theme.colors.primary.default};
+    }
+  }
 `;
+
 const StyledTable = styled.table`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 8px;
-  margin: 16px 32px 0;
-  padding: 8px;
+  margin: ${(props) => props.theme.spacing.medium}
+    ${(props) => props.theme.spacing.large} 0;
+  padding: ${(props) => props.theme.spacing.small};
   border-radius: 8px;
-  background-color: #e6e8ec;
+  background-color: ${(props) => props.theme.colors.gray};
 `;
+
 const THead = styled.thead`
+  width: 100%;
   display: flex;
 `;
+
 const TrHeader = styled.tr`
   display: flex;
+  width: 100%;
+  color: ${(props) => props.theme.colors.dark};
 `;
+
 const Th = styled.th`
-  height: 24px;
-  align-self: stretch;
-  flex-grow: 0;
+  padding: 0 ${(props) => props.theme.spacing.medium};
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
   align-items: center;
-  padding: 0 16px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: #55687d;
 `;
-const Tbody = styled.tbody``;
-const TrBody = styled.tr`
-  display: flex;
-`;
-const Td = styled.td`
-  height: 56px;
-  align-self: stretch;
-  flex-grow: 0;
+
+const Tbody = styled.tbody`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  gap: 4px;
-  padding: 0 16px;
+  width: 100%;
+  gap: ${(props) => props.theme.spacing.small};
+  margin-top: ${(props) => props.theme.spacing.small};
+  max-height: 500px;
+  overflow: auto;
+`;
+
+const TrBody = styled.tr`
+  display: flex;
+  width: 100%;
+  border-radius: 8px;
+  background-color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.text};
+  min-height: 54px;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  font-weight: ${(props) => props.theme.fontWeights.medium};
+`;
+
+const Td = styled.td`
+  padding: 0 ${(props) => props.theme.spacing.medium};
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export type TableProps<T> = {
   title: string;
   onAdd: () => void;
-  columns: unknown[];
+  columns: ColumnDef<T, unknown>[];
   data: T[];
 };
 
@@ -80,7 +125,9 @@ export const Table = <T extends object>({
     <TablePageContainer>
       <TableTopBar>
         <h3>{title}</h3>
-        <button onClick={onAdd}>+ Add New</button>
+        <button onClick={onAdd}>
+          <FontAwesomeIcon icon={faPlus} /> Add New
+        </button>
       </TableTopBar>
       <StyledTable>
         <THead>
